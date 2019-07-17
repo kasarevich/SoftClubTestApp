@@ -1,27 +1,24 @@
+import entity.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
+import util.DataHelper;
 
 public class BaseTest {
 
-    private static final String DRIVER_PROPERTY = "webdriver.chrome.driver";
-    private static final String DRIVER_PATH = "C:/java_projects/tools/chromedriver_75/chromedriver.exe";
-    private static final String CAPABILITY_KEY = "chrome.switches";
-    private static final String EMPTY_START_PAGE = "--homepage=about:blank";
+    public static WebDriver driver;
 
-    protected static WebDriver driver;
-
-    @BeforeSuite(alwaysRun = true)
+    @BeforeSuite
     public void setUp(){
-        System.setProperty(DRIVER_PROPERTY, DRIVER_PATH);
+        System.setProperty(DataHelper.getInstance().getDriverProperty(), DataHelper.getInstance().getDriverPath());
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setCapability(CAPABILITY_KEY, EMPTY_START_PAGE);
+        chromeOptions.setCapability(DataHelper.getInstance().getCapabilityKey(), DataHelper.getInstance().getDriverEmptyPage());
+        chromeOptions.addArguments(DataHelper.getInstance().getFullscreenArgument());
         driver = new ChromeDriver(chromeOptions);
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterSuite
     public void tearDown() {
         driver.close();
     }

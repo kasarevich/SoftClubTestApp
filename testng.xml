@@ -1,10 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="TestAll">
-    <test name="case1">
+<suite name="TestAll" >
+    <test name="Integration" preserve-order="true">
         <classes>
+            <class name="EmailTest"/>
             <class name="LogInTest"/>
             <class name="LogOutTest"/>
-            <class name="EmailTest"/>
         </classes>
     </test>
 </suite>
